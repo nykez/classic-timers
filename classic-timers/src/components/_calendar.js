@@ -36,10 +36,11 @@ const wowEvents = [
 
 export default function Calendar(){
     return (
-        <div className="w-8/12 bg-neutral-800/50 border border-neutral-600 border-1 rounded-lg p-5">
+        <div className="sm:w-full md:w-8/12 bg-neutral-800/50 border border-neutral-600 border-1 rounded-lg p-5">
             <FullCalendar
                 plugins={[rrulePlugin, dayGridPlugin]}
                 events={wowEvents}
+                initialView={"dayGridMonth"}
             />
         </div>
     )
