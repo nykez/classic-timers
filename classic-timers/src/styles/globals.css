@@ -5,3 +5,13 @@
 body{
     
 }
+
+:root {
+    --fc-list-event-hover-bg-color: transparent !important;
+}
+
+.fc-list-day  {
+    background-color: gray; /* Set background color for day of the week names */
+    color: #333; /* Set text color for day of the week names */
+  }
+

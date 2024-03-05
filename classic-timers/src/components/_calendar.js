@@ -1,6 +1,11 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
 import rrulePlugin from '@fullcalendar/rrule'
+import timeGridPlugin from '@fullcalendar/timegrid';
+import React, { useEffect, useRef } from 'react';
+import { Calendar } from "@fullcalendar/core";
+import {isMobile} from 'react-device-detect';
+import listPlugin from '@fullcalendar/list'
 
 const wowEvents = [
     {
@@ -34,14 +39,50 @@ const wowEvents = [
     }
 ]
 
-export default function Calendar(){
-    return (
-        <div className="sm:w-full md:w-8/12 bg-neutral-800/50 border border-neutral-600 border-1 rounded-lg p-5">
-            <FullCalendar
-                plugins={[rrulePlugin, dayGridPlugin]}
-                events={wowEvents}
-                initialView={"dayGridMonth"}
-            />
+const RaidCalendar = () => {
+    const calendarRef = useRef(null);
+
+    useEffect(() => {
+      const calendarEl = calendarRef.current;
+      const calendar = new Calendar(calendarEl, {
+        plugins: [rrulePlugin, dayGridPlugin, listPlugin],
+        initialView: 'dayGridMonth', // Initial view can be adjusted as per requirement
+        events: wowEvents,
+        contentHeight: 'auto',
+      });
+
+      if (isMobile)
+      {
+        calendar.changeView('listWeek');
+      }
+      else
+      {
+        calendar.changeView('dayGridMonth');
+      }
+
+      function handleWindowResize() {
+        if (window.innerWidth > 924) {
+          calendar.changeView('dayGridMonth');
+        } else {
+          calendar.changeView('listWeek');
+        }
+      }
+  
+      window.addEventListener('resize', handleWindowResize);
+
+      calendar.render();
+  
+      return () => {
+        calendar.destroy();
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    }, []);
+  
+    return (<>
+        <div className="sm:w-full md:w-8/12 sm:h-full bg-neutral-800/50 border border-neutral-600 border-1 rounded-lg p-5 text-white">
+            <div ref={calendarRef} />
         </div>
-    )
+    </>)
 }
+
+export default RaidCalendar;
