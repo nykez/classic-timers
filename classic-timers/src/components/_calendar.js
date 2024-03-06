@@ -14,8 +14,9 @@ const wowEvents = [
         rrule: {
             freq: 'hourly',
             interval: 72,
-            until: '2026-06-01'
-          }
+            until: '2026-06-01',
+            dtstart: '20230305'
+          },
     },
     {
         title: "Blackfathom Deeps",
@@ -23,7 +24,8 @@ const wowEvents = [
         rrule: {
             freq: 'hourly',
             interval: 72,
-            until: '2026-06-01'
+            until: '2026-06-01',
+            dtstart: '20230305'
           }
     },
     {
