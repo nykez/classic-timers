@@ -29,7 +29,7 @@ const wowEvents = [
           }
     },
     {
-        title: "Darkmoon Fair (Alliance)",
+        title: "Darkmoon Faire (Alliance)",
         color: "rgb(41, 128, 185)",
         rrule: {
             freq: 'weekly',
