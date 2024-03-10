@@ -1,8 +1,9 @@
-
+import { Analytics } from "@vercel/analytics/react"
 export default function Layout({ children }) {
-  return (
-    <>
-      <main className="mt-5">{children}</main>
-    </>
-  )
+    return (
+        <>
+            <Analytics />
+            <main className="mt-5">{children}</main>
+        </>
+    )
 }
