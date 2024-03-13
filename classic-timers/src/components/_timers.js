@@ -22,7 +22,7 @@ function formatTime(seconds) {
 
 export default function TimedEvent(props) {
     const [timeUntil, setTimeUntil] = useState("");
-    let inProgress = false;
+    const [inProgress, setInProgress] = useState(false);
 
     useEffect(() => {
         const calcTime = () => {
@@ -35,9 +35,10 @@ export default function TimedEvent(props) {
             let timeLeft = timestamp - utc;
 
 
-            if (inProgressEvent && inProgressEvent > 9000)
+            console.log(inProgressEvent, timeLeft > inProgressEvent)
+            if (inProgressEvent && timeLeft > inProgressEvent)
             {
-                inProgress = true;
+                setInProgress(true);
             }
 
             setTimeUntil(formatTime(timeLeft));
@@ -54,7 +55,7 @@ export default function TimedEvent(props) {
             <div>
                 <h4 className='font-bold'>{props.name}</h4>
                 {inProgress && 
-                    <p>In progress</p>
+                    <p>In progress!</p>
                 }
                 {!inProgress &&
                     <p>{timeUntil}</p>
